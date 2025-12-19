@@ -15,6 +15,14 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
 }
 
+ratingMap = {
+    "One": 1,
+    "Two": 2,
+    "Three": 3,
+    "Four": 4,
+    "Five": 5
+}
+
 # Fetch the webpage
 url = "https://books.toscrape.com/"
 response = requests.get(url, headers=headers)
@@ -36,7 +44,8 @@ for article in articles:
     book_price = price_div.find("p", class_="price_color").text.split("£")[1]
     
     # Get book rating
-    book_rating = article.find("p", class_="star-rating").text
+    book_rating = article.find("p", class_="star-rating").get("class")[1]
+    book_rating = ratingMap[book_rating]
     
     items.append({
         "Title": book_name,

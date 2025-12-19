@@ -8,8 +8,3 @@ After running `books_scraper.py`, you will find:
 
 - `books_data.csv` - Book data in CSV format
 - `books_data.xlsx` - Book data in Excel format
-
-## Note
-
-These files are git-ignored to keep the repository clean.
-Run the scraper to generate fresh data.

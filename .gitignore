@@ -15,10 +15,6 @@ env/
 *.swp
 *.swo
 
-# Output files (can be regenerated)
-output/*.csv
-output/*.xlsx
-
 # Cache
 cache/
 *.cache
