@@ -12,12 +12,12 @@ This document provides detailed explanations of key web scraping concepts and te
 
 ### HTTP vs HTTPS
 
-| Feature | HTTP | HTTPS |
-|---------|------|-------|
-| **Security** | Unencrypted | Encrypted (TLS/SSL) |
-| **Port** | 80 | 443 |
-| **URL Prefix** | `http://` | `https://` |
-| **Use Case** | Legacy systems | Modern web (preferred) |
+| Feature        | HTTP           | HTTPS                  |
+| -------------- | -------------- | ---------------------- |
+| **Security**   | Unencrypted    | Encrypted (TLS/SSL)    |
+| **Port**       | 80             | 443                    |
+| **URL Prefix** | `http://`      | `https://`             |
+| **Use Case**   | Legacy systems | Modern web (preferred) |
 
 ### Anatomy of an HTTP Request
 
@@ -32,6 +32,7 @@ Cookie: session_id=abc123
 ```
 
 **Components:**
+
 1. **Request Line**: Method + Path + HTTP Version
 2. **Headers**: Metadata about the request
 3. **Body**: Data sent with POST/PUT requests (optional)
@@ -51,22 +52,23 @@ Set-Cookie: visitor_id=xyz789
 ```
 
 **Components:**
+
 1. **Status Line**: HTTP Version + Status Code + Status Message
 2. **Headers**: Metadata about the response
 3. **Body**: The actual content (HTML, JSON, etc.)
 
 ### Important Status Codes for Scrapers
 
-| Code | Meaning | Scraper Action |
-|------|---------|----------------|
-| **200** | Success | Process the response |
-| **301/302** | Redirect | Follow the redirect |
-| **400** | Bad Request | Fix request format |
-| **403** | Forbidden | Check if blocked |
-| **404** | Not Found | Skip this URL |
-| **429** | Rate Limited | Slow down requests |
-| **500** | Server Error | Retry later |
-| **503** | Service Unavailable | Wait and retry |
+| Code        | Meaning             | Scraper Action       |
+| ----------- | ------------------- | -------------------- |
+| **200**     | Success             | Process the response |
+| **301/302** | Redirect            | Follow the redirect  |
+| **400**     | Bad Request         | Fix request format   |
+| **403**     | Forbidden           | Check if blocked     |
+| **404**     | Not Found           | Skip this URL        |
+| **429**     | Rate Limited        | Slow down requests   |
+| **500**     | Server Error        | Retry later          |
+| **503**     | Service Unavailable | Wait and retry       |
 
 ---
 
@@ -78,13 +80,13 @@ The DOM is a programming interface that represents an HTML document as a tree st
 
 ### Types of DOM Nodes
 
-| Node Type | Description | Example |
-|-----------|-------------|---------|
-| **Document** | Root of the tree | `document` |
-| **Element** | HTML tags | `<div>`, `<p>`, `<a>` |
-| **Attribute** | Tag attributes | `class="header"` |
-| **Text** | Text content | "Hello World" |
-| **Comment** | HTML comments | `<!-- comment -->` |
+| Node Type     | Description      | Example               |
+| ------------- | ---------------- | --------------------- |
+| **Document**  | Root of the tree | `document`            |
+| **Element**   | HTML tags        | `<div>`, `<p>`, `<a>` |
+| **Attribute** | Tag attributes   | `class="header"`      |
+| **Text**      | Text content     | "Hello World"         |
+| **Comment**   | HTML comments    | `<!-- comment -->`    |
 
 ### DOM Navigation
 
@@ -157,12 +159,13 @@ Many modern websites use JavaScript to load content dynamically. When you reques
 </div>
 
 <script>
-  fetch('/api/products')
-    .then(response => response.json())
-    .then(data => {
+  fetch("/api/products")
+    .then((response) => response.json())
+    .then((data) => {
       // Inject products into the page
-      document.getElementById('product-container').innerHTML = 
-        data.map(p => `<div>${p.name} - $${p.price}</div>`).join('');
+      document.getElementById("product-container").innerHTML = data
+        .map((p) => `<div>${p.name} - $${p.price}</div>`)
+        .join("");
     });
 </script>
 ```
@@ -174,6 +177,7 @@ Many modern websites use JavaScript to load content dynamically. When you reques
 Selenium controls a real browser, executing JavaScript just like a human user.
 
 **How it works:**
+
 ```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
 │   Python    │ ──► │  Selenium   │ ──► │   Chrome    │
@@ -188,6 +192,7 @@ Selenium controls a real browser, executing JavaScript just like a human user.
 ```
 
 **Capabilities:**
+
 - Execute JavaScript
 - Click buttons
 - Fill forms
@@ -200,6 +205,7 @@ Selenium controls a real browser, executing JavaScript just like a human user.
 Often, JavaScript fetches data from an API. You can call this API directly!
 
 **Steps:**
+
 1. Open browser DevTools (F12)
 2. Go to Network tab
 3. Filter by XHR/Fetch
@@ -214,6 +220,7 @@ Often, JavaScript fetches data from an API. You can call this API directly!
 ### CAPTCHA Types
 
 #### 1. Text CAPTCHA
+
 ```
 ┌─────────────────────────┐
 │   7 X k 2 F             │  ← Distorted text
@@ -223,6 +230,7 @@ Often, JavaScript fetches data from an API. You can call this API directly!
 ```
 
 #### 2. Image CAPTCHA (reCAPTCHA v2)
+
 ```
 ┌─────────────────────────────────┐
 │ Select all images with          │
@@ -239,6 +247,7 @@ Often, JavaScript fetches data from an API. You can call this API directly!
 ```
 
 #### 3. reCAPTCHA v3 (Invisible)
+
 - No user interaction required
 - Monitors user behavior
 - Assigns a score (0.0 - 1.0)
@@ -247,12 +256,14 @@ Often, JavaScript fetches data from an API. You can call this API directly!
 ### IP Blocking
 
 **Why IPs Get Blocked:**
+
 - Too many requests in short time
 - Accessing restricted areas
 - Pattern matching (bot behavior)
 - Geographic restrictions
 
 **Detection Methods:**
+
 ```
 Request Pattern Analysis:
 ├── Request frequency (requests/minute)
@@ -262,6 +273,7 @@ Request Pattern Analysis:
 ```
 
 **Mitigation:**
+
 ```python
 import time
 import random
@@ -386,18 +398,18 @@ def get_cached_response(url, cache_dir="cache"):
     # Create cache filename from URL
     url_hash = hashlib.md5(url.encode()).hexdigest()
     cache_file = os.path.join(cache_dir, f"{url_hash}.pkl")
-    
+
     # Check if cached
     if os.path.exists(cache_file):
         with open(cache_file, "rb") as f:
             return pickle.load(f)
-    
+
     # Fetch and cache
     response = requests.get(url)
     os.makedirs(cache_dir, exist_ok=True)
     with open(cache_file, "wb") as f:
         pickle.dump(response, f)
-    
+
     return response
 ```
 
@@ -409,12 +421,12 @@ For high-volume scraping, consider using `aiohttp` with `asyncio` for concurrent
 
 ## 📚 Summary
 
-| Topic | Key Takeaway |
-|-------|--------------|
-| **HTTP** | Understand request/response cycle and status codes |
-| **DOM** | Learn CSS selectors for precise element targeting |
-| **JavaScript** | Use Selenium when content loads dynamically |
-| **CAPTCHA** | Respect them; find alternatives |
-| **IP Blocking** | Rate limit and use proper headers |
-| **robots.txt** | Always check and respect it |
-| **Legal** | Read ToS, be ethical, don't cause harm |
+| Topic           | Key Takeaway                                       |
+| --------------- | -------------------------------------------------- |
+| **HTTP**        | Understand request/response cycle and status codes |
+| **DOM**         | Learn CSS selectors for precise element targeting  |
+| **JavaScript**  | Use Selenium when content loads dynamically        |
+| **CAPTCHA**     | Respect them; find alternatives                    |
+| **IP Blocking** | Rate limit and use proper headers                  |
+| **robots.txt**  | Always check and respect it                        |
+| **Legal**       | Read ToS, be ethical, don't cause harm             |

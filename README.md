@@ -24,6 +24,7 @@ A comprehensive web scraping project demonstrating data extraction techniques us
 **Web scraping** is the automated process of extracting data from websites. It involves fetching web pages and parsing the HTML/CSS content to retrieve specific information that can be used for analysis, research, or building datasets.
 
 ### Key Concepts:
+
 - **Crawling**: Navigating through multiple web pages by following links
 - **Scraping**: Extracting specific data from web pages
 - **Parsing**: Processing HTML/XML to locate desired elements
@@ -34,17 +35,18 @@ A comprehensive web scraping project demonstrating data extraction techniques us
 
 Web scraping is essential when:
 
-| Use Case | Description |
-|----------|-------------|
-| **No API Available** | Many websites don't provide APIs for their data |
-| **Data Aggregation** | Collecting data from multiple sources |
-| **Price Monitoring** | Tracking product prices across e-commerce sites |
-| **Research** | Academic research requiring large datasets |
-| **Lead Generation** | Gathering business contact information |
-| **Content Monitoring** | Tracking changes on websites |
-| **Market Analysis** | Analyzing competitor data and trends |
+| Use Case               | Description                                     |
+| ---------------------- | ----------------------------------------------- |
+| **No API Available**   | Many websites don't provide APIs for their data |
+| **Data Aggregation**   | Collecting data from multiple sources           |
+| **Price Monitoring**   | Tracking product prices across e-commerce sites |
+| **Research**           | Academic research requiring large datasets      |
+| **Lead Generation**    | Gathering business contact information          |
+| **Content Monitoring** | Tracking changes on websites                    |
+| **Market Analysis**    | Analyzing competitor data and trends            |
 
 ### Data Not Readily Available via APIs:
+
 - Book prices and ratings from online bookstores
 - Real estate listings and property details
 - Job postings from various job boards
@@ -60,23 +62,23 @@ Understanding HTTP (HyperText Transfer Protocol) is crucial for web scraping.
 
 ### HTTP Request Methods
 
-| Method | Description | Use in Scraping |
-|--------|-------------|-----------------|
-| `GET` | Retrieve data from server | Most common for scraping |
-| `POST` | Submit data to server | Form submissions, login |
-| `HEAD` | Get headers only | Check page existence |
-| `PUT` | Update resource | Rarely used in scraping |
-| `DELETE` | Delete resource | Not used in scraping |
+| Method   | Description               | Use in Scraping          |
+| -------- | ------------------------- | ------------------------ |
+| `GET`    | Retrieve data from server | Most common for scraping |
+| `POST`   | Submit data to server     | Form submissions, login  |
+| `HEAD`   | Get headers only          | Check page existence     |
+| `PUT`    | Update resource           | Rarely used in scraping  |
+| `DELETE` | Delete resource           | Not used in scraping     |
 
 ### HTTP Status Codes
 
-| Code Range | Category | Common Examples |
-|------------|----------|-----------------|
-| `1xx` | Informational | 100 Continue |
-| `2xx` | Success | 200 OK, 201 Created |
-| `3xx` | Redirection | 301 Moved, 302 Found |
-| `4xx` | Client Error | 400 Bad Request, 403 Forbidden, 404 Not Found, 429 Too Many Requests |
-| `5xx` | Server Error | 500 Internal Error, 503 Service Unavailable |
+| Code Range | Category      | Common Examples                                                      |
+| ---------- | ------------- | -------------------------------------------------------------------- |
+| `1xx`      | Informational | 100 Continue                                                         |
+| `2xx`      | Success       | 200 OK, 201 Created                                                  |
+| `3xx`      | Redirection   | 301 Moved, 302 Found                                                 |
+| `4xx`      | Client Error  | 400 Bad Request, 403 Forbidden, 404 Not Found, 429 Too Many Requests |
+| `5xx`      | Server Error  | 500 Internal Error, 503 Service Unavailable                          |
 
 ### HTTP Headers
 
@@ -163,13 +165,13 @@ Document
 
 ### Selecting Elements
 
-| Selector Type | Syntax | Example |
-|--------------|--------|---------|
-| Tag | `tag_name` | `soup.find('div')` |
-| ID | `#id_name` | `soup.find(id='main-title')` |
-| Class | `.class_name` | `soup.find(class_='content')` |
-| Attribute | `[attr=value]` | `soup.find(attrs={'data-id': '123'})` |
-| CSS Selector | Complex patterns | `soup.select('div.container > p')` |
+| Selector Type | Syntax           | Example                               |
+| ------------- | ---------------- | ------------------------------------- |
+| Tag           | `tag_name`       | `soup.find('div')`                    |
+| ID            | `#id_name`       | `soup.find(id='main-title')`          |
+| Class         | `.class_name`    | `soup.find(class_='content')`         |
+| Attribute     | `[attr=value]`   | `soup.find(attrs={'data-id': '123'})` |
+| CSS Selector  | Complex patterns | `soup.select('div.container > p')`    |
 
 ---
 
@@ -177,9 +179,9 @@ Document
 
 ### Static vs Dynamic Content
 
-| Type | Description | Scraping Approach |
-|------|-------------|-------------------|
-| **Static** | HTML content loaded directly | `requests` + `BeautifulSoup` |
+| Type        | Description                   | Scraping Approach                           |
+| ----------- | ----------------------------- | ------------------------------------------- |
+| **Static**  | HTML content loaded directly  | `requests` + `BeautifulSoup`                |
 | **Dynamic** | Content loaded via JavaScript | `Selenium`, `Playwright`, or API inspection |
 
 ### Why JavaScript Rendering Matters
@@ -202,18 +204,21 @@ Static Page:                          Dynamic Page (SPA):
 
 ### Solutions for Dynamic Content
 
-1. **Selenium WebDriver**: 
+1. **Selenium WebDriver**:
+
    - Automates real browser (Chrome, Firefox)
    - Executes JavaScript like a real user
    - Can handle clicks, scrolls, form submissions
    - Slower but handles complex scenarios
 
 2. **Playwright**:
+
    - Modern alternative to Selenium
    - Faster and more reliable
    - Built-in wait mechanisms
 
 3. **API Inspection**:
+
    - Use browser DevTools Network tab
    - Find underlying API calls
    - Directly call APIs (more efficient)
@@ -242,6 +247,7 @@ Types of CAPTCHA:
 ```
 
 **Handling Approaches:**
+
 - ❌ Avoid automated CAPTCHA solving (often against ToS)
 - ✅ Use official APIs if available
 - ✅ Reduce request frequency to avoid triggering
@@ -281,14 +287,14 @@ Solution:
 
 #### 4. Other Anti-Scraping Techniques
 
-| Technique | Description | Countermeasure |
-|-----------|-------------|----------------|
-| **Honeypot Traps** | Hidden links only bots follow | Check link visibility |
-| **JavaScript Challenges** | Require JS execution | Use Selenium/Playwright |
-| **Cookie Validation** | Session-based access | Maintain session cookies |
-| **Dynamic Element IDs** | Changing class/ID names | Use relative selectors |
-| **Request Fingerprinting** | TLS/Browser fingerprint | Specialized libraries |
-| **Login Walls** | Required authentication | Handle login flow |
+| Technique                  | Description                   | Countermeasure           |
+| -------------------------- | ----------------------------- | ------------------------ |
+| **Honeypot Traps**         | Hidden links only bots follow | Check link visibility    |
+| **JavaScript Challenges**  | Require JS execution          | Use Selenium/Playwright  |
+| **Cookie Validation**      | Session-based access          | Maintain session cookies |
+| **Dynamic Element IDs**    | Changing class/ID names       | Use relative selectors   |
+| **Request Fingerprinting** | TLS/Browser fingerprint       | Specialized libraries    |
+| **Login Walls**            | Required authentication       | Handle login flow        |
 
 ---
 
@@ -316,6 +322,7 @@ Sitemap: https://example.com/sitemap.xml
 ```
 
 **Key Directives:**
+
 - `User-agent`: Which bots the rules apply to
 - `Disallow`: Paths that shouldn't be accessed
 - `Allow`: Paths that can be accessed
@@ -324,6 +331,7 @@ Sitemap: https://example.com/sitemap.xml
 #### 2. Terms of Service (ToS)
 
 Before scraping ANY website:
+
 - ✅ Read the Terms of Service
 - ✅ Check if scraping is explicitly prohibited
 - ✅ Look for data usage restrictions
@@ -344,6 +352,7 @@ for url in urls:
 ```
 
 **Why Rate Limiting Matters:**
+
 - 🚫 Excessive requests = Unintentional DDoS attack
 - 🚫 Can crash or slow down the website
 - 🚫 May result in legal action
@@ -351,13 +360,13 @@ for url in urls:
 
 #### 4. Legal Considerations
 
-| Consideration | Description |
-|--------------|-------------|
-| **Copyright** | Scraped content may be copyrighted |
-| **CFAA (US)** | Computer Fraud and Abuse Act |
-| **GDPR (EU)** | Personal data protection laws |
-| **ToS Violations** | Breach of contract |
-| **Trespass** | Unauthorized access claims |
+| Consideration      | Description                        |
+| ------------------ | ---------------------------------- |
+| **Copyright**      | Scraped content may be copyrighted |
+| **CFAA (US)**      | Computer Fraud and Abuse Act       |
+| **GDPR (EU)**      | Personal data protection laws      |
+| **ToS Violations** | Breach of contract                 |
+| **Trespass**       | Unauthorized access claims         |
 
 #### 5. Ethical Scraping Checklist
 
@@ -378,15 +387,15 @@ for url in urls:
 
 ### Python Libraries for Web Scraping
 
-| Library | Purpose | Best For |
-|---------|---------|----------|
-| **requests** | HTTP requests | Simple page fetching |
-| **BeautifulSoup** | HTML parsing | Static content extraction |
-| **lxml** | Fast XML/HTML parsing | Large-scale scraping |
-| **Selenium** | Browser automation | JavaScript-heavy sites |
-| **Playwright** | Modern browser automation | Complex interactions |
-| **Scrapy** | Full scraping framework | Large projects |
-| **pandas** | Data manipulation | Data processing/export |
+| Library           | Purpose                   | Best For                  |
+| ----------------- | ------------------------- | ------------------------- |
+| **requests**      | HTTP requests             | Simple page fetching      |
+| **BeautifulSoup** | HTML parsing              | Static content extraction |
+| **lxml**          | Fast XML/HTML parsing     | Large-scale scraping      |
+| **Selenium**      | Browser automation        | JavaScript-heavy sites    |
+| **Playwright**    | Modern browser automation | Complex interactions      |
+| **Scrapy**        | Full scraping framework   | Large projects            |
+| **pandas**        | Data manipulation         | Data processing/export    |
 
 ### Installation
 
@@ -413,12 +422,14 @@ Playwright          ★★★☆☆    ✓             ★★★★☆          
 Scraping book data from [books.toscrape.com](https://books.toscrape.com/) (a website specifically designed for practicing web scraping).
 
 **Data Extracted:**
+
 - Book titles
 - Prices
 - Star ratings
 - Availability
 
 **Output Format:**
+
 - CSV file for data analysis
 - Excel file for reporting
 

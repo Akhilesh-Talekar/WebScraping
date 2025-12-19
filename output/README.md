@@ -11,5 +11,5 @@ After running `books_scraper.py`, you will find:
 
 ## Note
 
-These files are git-ignored to keep the repository clean. 
+These files are git-ignored to keep the repository clean.
 Run the scraper to generate fresh data.
